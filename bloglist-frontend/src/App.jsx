@@ -1,24 +1,28 @@
-import { useState, useEffect } from 'react'
-import Blog from './components/Blog'
-import blogService from './services/blogs'
+import { useEffect, useContext } from "react";
+import { LoginForm } from "./components/login";
+import { AuthContext } from "./context/authcontext";
+import { BlockList } from "./components/BlogList";
 
 const App = () => {
-  const [blogs, setBlogs] = useState([])
+  const { user, login } = useContext(AuthContext);
 
   useEffect(() => {
-    blogService.getAll().then(blogs =>
-      setBlogs( blogs )
-    )  
-  }, [])
+    const savedUser = window.localStorage.getItem("loggedUser");
+    if (savedUser) {
+      const parsed = JSON.parse(savedUser);
+      login(parsed);
+    }
+  }, []);
+
+  if (!user) return <LoginForm />;
 
   return (
     <div>
-      <h2>blogs</h2>
-      {blogs.map(blog =>
-        <Blog key={blog.id} blog={blog} />
-      )}
+      <h1>Blogs</h1>
+      <p>{user.name} logged in</p>
+      <BlockList />
     </div>
-  )
-}
+  );
+};
 
-export default App
+export default App;
