@@ -2,6 +2,7 @@ import { useEffect, useContext } from "react";
 import { LoginForm } from "./components/login";
 import { AuthContext } from "./context/authcontext";
 import { BlockList } from "./components/BlogList";
+import LogoutButton from "./components/LogOutButton";
 
 const App = () => {
   const { user, login } = useContext(AuthContext);
@@ -20,6 +21,7 @@ const App = () => {
     <div>
       <h1>Blogs</h1>
       <p>{user.name} logged in</p>
+      <LogoutButton />
       <BlockList />
     </div>
   );

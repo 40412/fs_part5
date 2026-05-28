@@ -9,7 +9,6 @@ export const LoginForm = () => {
 
   const handleLogin = async (event) => {
     event.preventDefault();
-    console.log("before try");
 
     try {
       const user = await loginService({
