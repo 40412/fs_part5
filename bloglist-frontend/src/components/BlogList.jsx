@@ -1,10 +1,8 @@
-import getAll from "../services/blogs";
+import { useEffect } from "react";
+import { getAll } from "../services/blogs";
 import { Blog } from "./Blog";
-import { useState, useEffect } from "react";
 
-export const BlockList = () => {
-  const [blogs, setBlogs] = useState([]);
-
+export const BlockList = ({ blogs, setBlogs }) => {
   useEffect(() => {
     const getBlocks = async () => {
       const bloglist = await getAll();
