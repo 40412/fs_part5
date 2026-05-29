@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { create } from "../services/blogs";
 
-const BlogForm = ({ setblogs, showNotification }) => {
+const BlogForm = ({ setblogs, showNotification, setFormVisible }) => {
   const [title, setTitle] = useState("");
   const [author, setAuthor] = useState("");
   const [url, setUrl] = useState("");
@@ -18,6 +18,7 @@ const BlogForm = ({ setblogs, showNotification }) => {
         `New Blog, ${result.title} by ${result.author} created!`,
         "success",
       );
+      setFormVisible(false);
     } catch (e) {
       showNotification(e.message, "error");
     }

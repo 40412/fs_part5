@@ -10,6 +10,7 @@ const App = () => {
   const { user, login } = useContext(AuthContext);
   const [blogs, setBlogs] = useState([]);
   const [notification, setNotification] = useState(null);
+  const [blogFormVisible, setBlogFormVisible] = useState(false);
 
   useEffect(() => {
     const savedUser = window.localStorage.getItem("loggedUser");
@@ -38,9 +39,18 @@ const App = () => {
       <Notification message={notification} />
       <p>{user.name} logged in</p>
       <LogoutButton />
-      <div>
-        <BlogForm setblogs={setBlogs} showNotification={showNotification} />
-      </div>
+      <button onClick={() => setBlogFormVisible(true)}>Create new blog</button>
+      {blogFormVisible && (
+        <div>
+          <BlogForm
+            setblogs={setBlogs}
+            showNotification={showNotification}
+            setFormVisible={setBlogFormVisible}
+          />
+          <button onClick={() => setBlogFormVisible(false)}>Cancel</button>
+        </div>
+      )}
+
       <BlockList blogs={blogs} setBlogs={setBlogs} />
     </div>
   );
