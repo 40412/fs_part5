@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { create } from "../services/blogs";
 
-const BlogForm = ({ setblogs }) => {
+const BlogForm = ({ setblogs, showNotification }) => {
   const [title, setTitle] = useState("");
   const [author, setAuthor] = useState("");
   const [url, setUrl] = useState("");
@@ -10,11 +10,21 @@ const BlogForm = ({ setblogs }) => {
     e.preventDefault();
     //onCreate({ title, author, url });
     const newBlog = { title: title, author: author, url: url };
-    const result = await create(newBlog);
+
+    try {
+      const result = await create(newBlog);
+      setblogs((blogs) => [...blogs, result]);
+      showNotification(
+        `New Blog, ${result.title} by ${result.author} created!`,
+        "success",
+      );
+    } catch (e) {
+      showNotification(e.message, "error");
+    }
+
     setTitle("");
     setAuthor("");
     setUrl("");
-    setblogs((blogs) => [...blogs, result]);
   };
 
   return (

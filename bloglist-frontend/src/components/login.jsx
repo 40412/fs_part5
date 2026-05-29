@@ -2,7 +2,7 @@ import { useState, useContext } from "react";
 import loginService from "../services/login";
 import { AuthContext } from "../context/authcontext";
 
-export const LoginForm = () => {
+export const LoginForm = ({ showNotification }) => {
   const { login } = useContext(AuthContext);
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -17,10 +17,14 @@ export const LoginForm = () => {
       });
 
       login(user);
+
+      showNotification("Successfully logged in", "success");
+
       setUsername("");
       setPassword("");
     } catch (exception) {
       console.log("wrong credentials");
+      showNotification("Wrong credentials", "error");
     }
   };
 
