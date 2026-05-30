@@ -2,7 +2,7 @@ import { useContext, useState } from "react";
 import { modify, remove } from "../services/blogs";
 import { AuthContext } from "../context/authcontext";
 
-export const Blog = ({ blog, setBlogs }) => {
+export const Blog = ({ blog, setBlogs, likeBlog = () => {} }) => {
   const { user } = useContext(AuthContext);
   const [viewDetails, setViewDetails] = useState(false);
   const [likes, setLikes] = useState(blog.likes);
@@ -16,6 +16,7 @@ export const Blog = ({ blog, setBlogs }) => {
   };
 
   const like = async (id) => {
+    likeBlog(id);
     await modify(id, { likes: 1 });
     setLikes(likes + 1);
   };
