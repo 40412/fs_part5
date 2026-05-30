@@ -26,7 +26,7 @@ export const Blog = ({ blog, setBlogs }) => {
         await remove(blog.id);
         setBlogs((blogs) => blogs.filter((b) => b.id !== blog.id));
       } catch (e) {
-        console.log("error removing blog");
+        console.log("error removing blog", e);
       }
     }
   };

@@ -22,8 +22,8 @@ export const LoginForm = ({ showNotification }) => {
 
       setUsername("");
       setPassword("");
-    } catch (exception) {
-      console.log("wrong credentials");
+    } catch (e) {
+      console.log(e);
       showNotification("Wrong credentials", "error");
     }
   };
