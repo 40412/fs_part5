@@ -1,7 +1,9 @@
-import { useState } from "react";
-import { modify } from "../services/blogs";
+import { useContext, useState } from "react";
+import { modify, remove } from "../services/blogs";
+import { AuthContext } from "../context/authcontext";
 
-export const Blog = ({ blog }) => {
+export const Blog = ({ blog, setBlogs }) => {
+  const { user } = useContext(AuthContext);
   const [viewDetails, setViewDetails] = useState(false);
   const [likes, setLikes] = useState(blog.likes);
 
@@ -16,6 +18,17 @@ export const Blog = ({ blog }) => {
   const like = async (id) => {
     await modify(id, { likes: 1 });
     setLikes(likes + 1);
+  };
+
+  const removeBlog = async () => {
+    if (window.confirm(`Remove blog ${blog.title} by ${blog.author}?`)) {
+      try {
+        await remove(blog.id);
+        setBlogs((blogs) => blogs.filter((b) => b.id !== blog.id));
+      } catch (e) {
+        console.log("error removing blog");
+      }
+    }
   };
 
   return (
@@ -33,6 +46,11 @@ export const Blog = ({ blog }) => {
             </div>
 
             <div>{blog.user.name}</div>
+            {blog.user.username === user.username && (
+              <button style={{ backgroundColor: "red" }} onClick={removeBlog}>
+                Remove
+              </button>
+            )}
           </div>
         )}
       </div>

@@ -19,3 +19,11 @@ export const modify = async (id, body) => {
   const response = await axios.put(`${baseUrl}/${id}`, body);
   return response.status;
 };
+
+export const remove = async (id) => {
+  const config = {
+    headers: { Authorization: getToken() },
+  };
+  const response = await axios.delete(`${baseUrl}/${id}`, config);
+  return response.data;
+};

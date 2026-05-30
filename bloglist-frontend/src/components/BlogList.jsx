@@ -8,7 +8,6 @@ export const BlockList = ({ blogs, setBlogs }) => {
       const bloglist = await getAll();
       setBlogs(bloglist);
     };
-
     getBlocks();
   }, []);
 
@@ -18,7 +17,7 @@ export const BlockList = ({ blogs, setBlogs }) => {
       {[...blogs]
         .sort((a, b) => b.likes - a.likes)
         .map((blog) => (
-          <Blog key={blog.id} blog={blog} />
+          <Blog key={blog.id} blog={blog} setBlogs={setBlogs} />
         ))}
     </div>
   );
