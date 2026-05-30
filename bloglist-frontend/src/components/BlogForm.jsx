@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { create } from "../services/blogs";
 
-const BlogForm = ({ setblogs, showNotification, setFormVisible }) => {
+const BlogForm = ({ setblogs, showNotification, setFormVisible, onCreate = () => {} }) => {
   const [title, setTitle] = useState("");
   const [author, setAuthor] = useState("");
   const [url, setUrl] = useState("");
@@ -9,9 +9,10 @@ const BlogForm = ({ setblogs, showNotification, setFormVisible }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     //onCreate({ title, author, url });
-    const newBlog = { title: title, author: author, url: url };
+    const newBlog = { title, author, url };
 
     try {
+      onCreate(newBlog);
       const result = await create(newBlog);
       setblogs((blogs) => [...blogs, result]);
       showNotification(
