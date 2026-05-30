@@ -14,3 +14,8 @@ export const create = async (newBlog) => {
   const response = await axios.post(baseUrl, newBlog, config);
   return response.data;
 };
+
+export const modify = async (id, body) => {
+  const response = await axios.put(`${baseUrl}/${id}`, body);
+  return response.status;
+};

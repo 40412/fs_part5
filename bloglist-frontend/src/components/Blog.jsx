@@ -1,7 +1,9 @@
 import { useState } from "react";
+import { modify } from "../services/blogs";
 
 export const Blog = ({ blog }) => {
   const [viewDetails, setViewDetails] = useState(false);
+  const [likes, setLikes] = useState(blog.likes);
 
   const blogStyle = {
     paddingTop: 10,
@@ -9,6 +11,11 @@ export const Blog = ({ blog }) => {
     border: "solid",
     borderWidth: 1,
     marginBottom: 5,
+  };
+
+  const like = async (id) => {
+    await modify(id, { likes: 1 });
+    setLikes(likes + 1);
   };
 
   return (
@@ -22,7 +29,7 @@ export const Blog = ({ blog }) => {
           <div>
             <div>{blog.url}</div>
             <div>
-              {blog.likes} <button>Like</button>
+              Likes {likes} <button onClick={() => like(blog.id)}>Like</button>
             </div>
 
             <div>{blog.user.name}</div>
