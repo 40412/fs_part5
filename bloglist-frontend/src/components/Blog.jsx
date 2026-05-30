@@ -33,19 +33,21 @@ export const Blog = ({ blog, setBlogs }) => {
 
   return (
     <>
-      <div style={blogStyle}>
-        {blog.title} | {blog.author}{" "}
+      <div style={blogStyle} className="blog">
+        <span className="blog-title">{blog.title}</span>
+        {" | "}
+        <span className="blog-author">{blog.author}</span>{" "}
         <button onClick={() => setViewDetails(!viewDetails)}>
           {viewDetails ? "Hide" : "View"}
         </button>
         {viewDetails && (
-          <div>
-            <div>{blog.url}</div>
-            <div>
+          <div className="blog-details">
+            <div className="blog-url">{blog.url}</div>
+            <div className="blog-likes">
               Likes {likes} <button onClick={() => like(blog.id)}>Like</button>
             </div>
 
-            <div>{blog.user.name}</div>
+            <div className="blog-user">{blog.user.name}</div>
             {blog.user.username === user.username && (
               <button style={{ backgroundColor: "red" }} onClick={removeBlog}>
                 Remove
