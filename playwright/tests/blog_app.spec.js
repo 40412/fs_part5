@@ -38,4 +38,26 @@ describe('Blog app', () => {
       await expect(page.getByText('Test User logged in')).not.toBeVisible()
     })
   })
+
+  describe('When logged in', () => {
+    beforeEach(async ({ page }) => {
+      await page.getByText('username').locator('input').fill('testuser')
+      await page.getByText('password').locator('input').fill('password123')
+      await page.getByRole('button', { name: 'login' }).click()
+    })
+
+    test('a blog can be created', async ({ page }) => {
+      await page.getByRole('button', { name: 'Create new blog' }).click()
+
+      await page.getByText('title:').locator('input').fill('A Test Blog')
+      await page.getByText('author:').locator('input').fill('Test Author')
+      await page.getByText('url:').locator('input').fill('https://test.com')
+
+      await page.getByRole('button', { name: 'create', exact: true }).click()
+
+      const blog = page.locator('.blog').filter({ hasText: 'A Test Blog' }).first()
+      await expect(blog.locator('.blog-title')).toHaveText('A Test Blog')
+      await expect(blog.locator('.blog-author')).toHaveText('Test Author')
+    })
+  })
 })
