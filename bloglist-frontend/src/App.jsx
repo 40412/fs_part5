@@ -5,12 +5,20 @@ import { BlockList } from "./components/BlogList";
 import LogoutButton from "./components/LogOutButton";
 import BlogForm from "./components/BlogForm";
 import { Notification } from "./components/Notifications";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Link,
+  useNavigate,
+} from "react-router-dom";
+import Navigation from "./components/Navigation";
+import Blog from "./components/BlogDetail";
 
 const App = () => {
   const { user, login } = useContext(AuthContext);
   const [blogs, setBlogs] = useState([]);
   const [notification, setNotification] = useState(null);
-  const [blogFormVisible, setBlogFormVisible] = useState(false);
 
   useEffect(() => {
     const savedUser = window.localStorage.getItem("loggedUser");
@@ -25,34 +33,39 @@ const App = () => {
     setTimeout(() => setNotification(null), 4000);
   };
 
-  if (!user)
+  /*  if (!user)
     return (
       <>
         <Notification message={notification} />
         <LoginForm showNotification={showNotification} />;
       </>
-    );
+    ); */
 
   return (
-    <div>
-      <h1>Blogs</h1>
+    <Router>
+      <Navigation />
       <Notification message={notification} />
-      <p>{user.name} logged in</p>
-      <LogoutButton />
-      <button onClick={() => setBlogFormVisible(true)}>Create new blog</button>
-      {blogFormVisible && (
-        <div>
-          <BlogForm
-            setblogs={setBlogs}
-            showNotification={showNotification}
-            setFormVisible={setBlogFormVisible}
-          />
-          <button onClick={() => setBlogFormVisible(false)}>Cancel</button>
-        </div>
-      )}
-
-      <BlockList blogs={blogs} setBlogs={setBlogs} />
-    </div>
+      <Routes>
+        <Route
+          path="/login"
+          element={<LoginForm showNotification={showNotification} />}
+        />
+        <Route
+          path="/"
+          element={<BlockList blogs={blogs} setBlogs={setBlogs} />}
+        />
+        <Route
+          path="/blogs/:id"
+          element={<Blog blogs={blogs} setBlogs={setBlogs} />}
+        />
+        <Route
+          path="/new"
+          element={
+            <BlogForm setblogs={setBlogs} showNotification={showNotification} />
+          }
+        ></Route>
+      </Routes>
+    </Router>
   );
 };
 

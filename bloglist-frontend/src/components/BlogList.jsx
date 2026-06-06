@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { getAll } from "../services/blogs";
-import { Blog } from "./Blog";
+import { Link } from "react-router-dom";
 
 export const BlockList = ({ blogs, setBlogs }) => {
   useEffect(() => {
@@ -17,7 +17,11 @@ export const BlockList = ({ blogs, setBlogs }) => {
       {[...blogs]
         .sort((a, b) => b.likes - a.likes)
         .map((blog) => (
-          <Blog key={blog.id} blog={blog} setBlogs={setBlogs} />
+          <div key={blog.id} className="blog">
+            <Link to={`/blogs/${blog.id}`}>
+              {blog.title} | {blog.author}
+            </Link>
+          </div>
         ))}
     </div>
   );

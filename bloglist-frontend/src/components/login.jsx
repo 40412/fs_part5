@@ -1,11 +1,13 @@
 import { useState, useContext } from "react";
 import loginService from "../services/login";
 import { AuthContext } from "../context/authcontext";
+import { useNavigate } from "react-router-dom";
 
 export const LoginForm = ({ showNotification }) => {
   const { login } = useContext(AuthContext);
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const navigate = useNavigate();
 
   const handleLogin = async (event) => {
     event.preventDefault();
@@ -22,6 +24,7 @@ export const LoginForm = ({ showNotification }) => {
 
       setUsername("");
       setPassword("");
+      navigate("/");
     } catch (e) {
       console.log(e);
       showNotification("Wrong credentials", "error");

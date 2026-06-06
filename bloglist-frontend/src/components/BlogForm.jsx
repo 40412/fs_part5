@@ -1,14 +1,15 @@
 import { useState } from "react";
 import { create } from "../services/blogs";
+import { useNavigate } from "react-router-dom";
 
-const BlogForm = ({ setblogs, showNotification, setFormVisible, onCreate = () => {} }) => {
+const BlogForm = ({ setblogs, showNotification, onCreate = () => {} }) => {
   const [title, setTitle] = useState("");
   const [author, setAuthor] = useState("");
   const [url, setUrl] = useState("");
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    //onCreate({ title, author, url });
     const newBlog = { title, author, url };
 
     try {
@@ -19,7 +20,7 @@ const BlogForm = ({ setblogs, showNotification, setFormVisible, onCreate = () =>
         `New Blog, ${result.title} by ${result.author} created!`,
         "success",
       );
-      setFormVisible(false);
+      navigate("/");
     } catch (e) {
       showNotification(e.message, "error");
     }

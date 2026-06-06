@@ -41,7 +41,7 @@ export const Blog = ({ blog, setBlogs, likeBlog = () => {} }) => {
         <button onClick={() => setViewDetails(!viewDetails)}>
           {viewDetails ? "Hide" : "View"}
         </button>
-        {viewDetails && (
+        {/* {viewDetails && (
           <div className="blog-details">
             <div className="blog-url">{blog.url}</div>
             <div className="blog-likes">
@@ -55,7 +55,7 @@ export const Blog = ({ blog, setBlogs, likeBlog = () => {} }) => {
               </button>
             )}
           </div>
-        )}
+        )} */}
       </div>
     </>
   );
