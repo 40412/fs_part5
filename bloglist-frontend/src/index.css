@@ -3,8 +3,10 @@
   background: #d3ffd3;
   border: 2px solid green;
   padding: 10px;
-  margin-bottom: 10px;
+  margin: 10px;
   border-radius: 5px;
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+  font-size: 40;
 }
 
 .error {
@@ -12,15 +14,17 @@
   background: #ffd3d3;
   border: 2px solid red;
   padding: 10px;
-  margin-bottom: 10px;
+  margin: 10px;
   border-radius: 5px;
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+  font-size: 40;
 }
 
 .blog {
-  padding-top: 10px;
-  padding-left: 2px;
+  padding: 10px;
   border: solid 1px black;
-  margin-bottom: 5px;
+  margin: 20px;
+  background-color: aqua;
 }
 
 .blog-title {

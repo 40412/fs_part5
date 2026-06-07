@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { create } from "../services/blogs";
 import { useNavigate } from "react-router-dom";
+import { Box, Button } from "@mui/material";
 
 const BlogForm = ({ setblogs, showNotification, onCreate = () => {} }) => {
   const [title, setTitle] = useState("");
@@ -34,22 +35,24 @@ const BlogForm = ({ setblogs, showNotification, onCreate = () => {} }) => {
     <form onSubmit={handleSubmit}>
       <h3>Create new</h3>
 
-      <div>
+      <Box style={{ margin: 10 }}>
         title:
         <input value={title} onChange={(e) => setTitle(e.target.value)} />
-      </div>
+      </Box>
 
-      <div>
+      <div style={{ margin: 10 }}>
         author:
         <input value={author} onChange={(e) => setAuthor(e.target.value)} />
       </div>
 
-      <div>
+      <div style={{ margin: 10 }}>
         url:
         <input value={url} onChange={(e) => setUrl(e.target.value)} />
       </div>
 
-      <button type="submit">create</button>
+      <Button variant="outlined" style={{ margin: 10 }} type="submit">
+        create
+      </Button>
     </form>
   );
 };

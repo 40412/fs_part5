@@ -10,8 +10,11 @@ const Navigation = () => {
   return (
     <AppBar position="static">
       <Toolbar>
+        <h1>Blogs App</h1>
+
         <Button
-          color="inherit"
+          style={{ margin: 10 }}
+          variant="contained"
           component={Link}
           to="/"
           sx={{ textTransform: "none" }}
@@ -21,7 +24,8 @@ const Navigation = () => {
 
         {user && (
           <Button
-            color="inherit"
+            style={{ margin: 10 }}
+            variant="contained"
             component={Link}
             to="/new"
             sx={{ textTransform: "none" }}
@@ -32,7 +36,8 @@ const Navigation = () => {
 
         {!user && (
           <Button
-            color="inherit"
+            style={{ margin: 10 }}
+            variant="contained"
             component={Link}
             to="/login"
             sx={{ textTransform: "none" }}

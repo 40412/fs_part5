@@ -2,6 +2,14 @@ import { useNavigate, useParams } from "react-router-dom";
 import { useContext, useState, useEffect } from "react";
 import { AuthContext } from "../context/authcontext";
 import { modify, remove } from "../services/blogs";
+import {
+  Card,
+  CardContent,
+  Typography,
+  Button,
+  Stack,
+  Link,
+} from "@mui/material";
 
 const Blog = ({ blogs, setBlogs }) => {
   const { id } = useParams();
@@ -46,17 +54,52 @@ const Blog = ({ blogs, setBlogs }) => {
   const canRemove = user && blog.user && blog.user.username === user.username;
 
   return (
-    <div>
-      <h2>{blog.title}</h2>
-      <a href={blog.url}>{blog.url}</a>
-      <p>
-        {likes} likes{" "}
-        {user && <button onClick={() => likeBlog(blog.id)}>like</button>}
-      </p>
-      <p>added by {blog.user?.name}</p>
+    <Card sx={{ mb: 3, p: 2 }}>
+      <CardContent>
+        <Typography variant="h5" sx={{ fontWeight: 600, mb: 1 }}>
+          {blog.title} | {blog.author}
+        </Typography>
 
-      {canRemove && <button onClick={() => removeBlog(blog.id)}>remove</button>}
-    </div>
+        <Link
+          href={blog.url}
+          target="_blank"
+          rel="noopener noreferrer"
+          underline="hover"
+          sx={{ display: "block", mb: 2 }}
+        >
+          {blog.url}
+        </Link>
+
+        <Stack direction="row" spacing={2} alignItems="center" sx={{ mb: 1 }}>
+          <Typography variant="body1">{likes} likes</Typography>
+
+          {user && (
+            <Button
+              variant="contained"
+              size="small"
+              onClick={() => likeBlog(blog.id)}
+            >
+              like
+            </Button>
+          )}
+        </Stack>
+
+        <Typography variant="body2" color="text.secondary" sx={{ mb: 2 }}>
+          added by {blog.user?.name}
+        </Typography>
+
+        {canRemove && (
+          <Button
+            variant="outlined"
+            color="error"
+            size="small"
+            onClick={() => removeBlog(blog.id)}
+          >
+            remove
+          </Button>
+        )}
+      </CardContent>
+    </Card>
   );
 };
 

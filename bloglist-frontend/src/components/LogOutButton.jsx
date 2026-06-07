@@ -2,6 +2,7 @@
 import { useContext } from "react";
 import { AuthContext } from "../context/authcontext";
 import { useNavigate } from "react-router-dom";
+import { Button } from "@mui/material";
 
 const LogoutButton = () => {
   const { logout } = useContext(AuthContext);
@@ -14,7 +15,9 @@ const LogoutButton = () => {
 
   return (
     <div>
-      <button onClick={handleLogout}>logout</button>
+      <Button variant="contained" onClick={handleLogout}>
+        logout
+      </Button>
     </div>
   );
 };

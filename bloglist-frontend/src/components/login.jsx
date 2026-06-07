@@ -2,6 +2,7 @@ import { useState, useContext } from "react";
 import loginService from "../services/login";
 import { AuthContext } from "../context/authcontext";
 import { useNavigate } from "react-router-dom";
+import { Button } from "@mui/material";
 
 export const LoginForm = ({ showNotification }) => {
   const { login } = useContext(AuthContext);
@@ -35,7 +36,7 @@ export const LoginForm = ({ showNotification }) => {
     <div>
       <h2>Login</h2>
       <form onSubmit={handleLogin}>
-        <div>
+        <div style={{ margin: 10 }}>
           username
           <input
             type="text"
@@ -43,7 +44,7 @@ export const LoginForm = ({ showNotification }) => {
             onChange={({ target }) => setUsername(target.value)}
           />
         </div>
-        <div>
+        <div style={{ margin: 10 }}>
           password
           <input
             type="password"
@@ -51,7 +52,9 @@ export const LoginForm = ({ showNotification }) => {
             onChange={({ target }) => setPassword(target.value)}
           />
         </div>
-        <button type="submit">login</button>
+        <Button variant="contained" type="submit">
+          login
+        </Button>
       </form>
     </div>
   );
