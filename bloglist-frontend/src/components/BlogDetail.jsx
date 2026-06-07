@@ -14,8 +14,11 @@ const Blog = ({ blogs, setBlogs }) => {
   useEffect(() => {
     const getLikes = () => {
       const blog = blogs.find((b) => b.id === id);
-      setLikes(blog.likes);
+      if (blog) {
+        setLikes(blog.likes);
+      }
     };
+
     getLikes();
   }, []);
 
